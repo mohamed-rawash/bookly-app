@@ -8,14 +8,13 @@ class FeaturedList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.25,
-      child: ListView.builder(
+      child: ListView.separated(
+        padding: EdgeInsets.zero,
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
         itemCount: 5,
-        itemBuilder: (context, index) => const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0),
-          child: CarouselItem(),
-        ),
+        itemBuilder: (context, index) => const CarouselItem(),
+        separatorBuilder: (context, index) => const SizedBox(width: 14,),
       ),
     );
   }

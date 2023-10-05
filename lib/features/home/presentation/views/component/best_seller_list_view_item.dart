@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../../core/utils/assets.dart';
 import '../../../../../core/utils/styles.dart';
@@ -46,11 +47,13 @@ class BestSellerListViewItem extends StatelessWidget {
                 ),
                 SizedBox(height: 3),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       r"19.6$",
                       style: Styles.textStyle20,
                     ),
+                    BookRating(),
                   ],
                 )
               ],
@@ -58,6 +61,26 @@ class BestSellerListViewItem extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class BookRating extends StatelessWidget {
+  const BookRating({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      children: [
+        FaIcon(
+          FontAwesomeIcons.solidStar,
+          color: Colors.amber,
+        ),
+        SizedBox(width: 6.3),
+        Text("4.3", style: Styles.textStyle18,),
+        SizedBox(width: 6.3),
+        Text("(2222)", style: Styles.textStyle14,),
+      ],
     );
   }
 }
