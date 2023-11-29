@@ -22,6 +22,9 @@ class Bookly extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: primaryColor,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: primaryColor
+        ),
         textTheme: GoogleFonts.cairoTextTheme(ThemeData.dark().textTheme)
       ),
     );
