@@ -10,12 +10,12 @@ final sl = GetIt.instance;
 
 class ServicesLocator {
   static void init(){
-    //cubits
-    sl.registerFactory(() => FeaturedBooksCubit(sl()));
-    sl.registerFactory(() => NewestBooksCubit(sl()));
+    // //cubits
+    // sl.registerFactory(() => FeaturedBooksCubit(sl()));
+    // sl.registerFactory(() => NewestBooksCubit(sl()));
     
     //repositories
-    sl.registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl(sl()));
+    sl.registerLazySingleton<HomeRepositoryImpl>(() => HomeRepositoryImpl(sl()));
     
     //Api Service
     sl.registerLazySingleton<ApiService>(() => ApiService(sl()));

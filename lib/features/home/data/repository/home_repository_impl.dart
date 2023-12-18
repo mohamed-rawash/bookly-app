@@ -15,11 +15,12 @@ class HomeRepositoryImpl implements HomeRepository {
   Future<Either<Failure, List<BookModel>>> fetchNewestBooks() async {
     try {
       final data = await apiService.get(endPoint: "volumes?q=subject:Programming&Filtering=free-ebooks&Sorting=newest");
+      print(data["items"]);
       return right(List<BookModel>.from((data['items'] as List).map((e) => BookModel.fromJson(e))));
     } on DioException catch (error) {
       return left(ServerFailure.fromDioError(error));
     } catch (error) {
-      return left(ServerFailure('Opps there was an error, Please try again!'));
+      return left(ServerFailure(error.toString()));
     }
   }
 

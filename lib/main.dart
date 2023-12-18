@@ -7,10 +7,12 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'config/app_router.dart';
+import 'core/utils/bloc_observer.dart';
 import 'core/utils/services_locator.dart';
 
 void main() {
   ServicesLocator.init();
+  Bloc.observer = AppBlocObserver();
   runApp(const Bookly());
 }
 
@@ -22,8 +24,8 @@ class Bookly extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => sl<FeaturedBooksCubit>()),
-        BlocProvider(create: (_) => sl<NewestBooksCubit>()),
+        BlocProvider(create: (_) => FeaturedBooksCubit(sl())..fetchFeaturedBooks()),
+        BlocProvider(create: (_) => NewestBooksCubit(sl())),
       ],
       child: MaterialApp.router(
         routerConfig: AppRouter.router,
