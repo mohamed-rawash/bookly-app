@@ -14,7 +14,7 @@ class HomeRepositoryImpl implements HomeRepository {
   @override
   Future<Either<Failure, List<BookModel>>> fetchNewestBooks() async {
     try {
-      final data = await apiService.get(endPoint: "volumes?q=subject:Programming&Filtering=free-ebooks&Sorting=newest");
+      final data = await apiService.get(endPoint: "volumes?q=subject:computer science&Filtering=free-ebooks&Sorting=newest");
       print(data["items"]);
       return right(List<BookModel>.from((data['items'] as List).map((e) => BookModel.fromJson(e))));
     } on DioException catch (error) {

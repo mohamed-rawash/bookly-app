@@ -3,9 +3,11 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/widgets/custom_image_loading.dart';
 
-class CarouselItem extends StatelessWidget {
-  const CarouselItem({Key? key,  required this.imageUrl}) : super(key: key);
+
+class CustomBookImage extends StatelessWidget {
+  const CustomBookImage({Key? key,  required this.imageUrl}) : super(key: key);
 
   final String imageUrl;
 
@@ -18,7 +20,7 @@ class CarouselItem extends StatelessWidget {
         child: CachedNetworkImage(
           fit: BoxFit.cover,
           imageUrl: imageUrl,
-          placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+          placeholder: (context, url) => const CustomImageLoading(),
           errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
       ),

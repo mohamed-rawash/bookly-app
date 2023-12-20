@@ -1,13 +1,16 @@
 import 'package:bookly/config/app_router.dart';
+import 'package:bookly/features/home/data/models/book_model.dart';
+import 'package:bookly/features/home/presentation/views/component/custom_book_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core/utils/assets.dart';
 import '../../../../../core/utils/styles.dart';
 
 class BestSellerListViewItem extends StatelessWidget {
-  const BestSellerListViewItem({super.key});
+  const BestSellerListViewItem({super.key, required this.book});
+
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -17,47 +20,41 @@ class BestSellerListViewItem extends StatelessWidget {
         height: 150,
         child: Row(
           children: [
-            AspectRatio(
-              aspectRatio: 2.5 / 4,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  image: const DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage(
-                      AssetsPaths.carouselImage,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            CustomBookImage(
+                imageUrl: book.volumeInfo?.imageLinks?.thumbnail ?? ""),
             const SizedBox(width: 30),
-            const Expanded(
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "This Is Plain Text For Texting Title In This Item",
+                    book.volumeInfo?.title ?? "UnKnown",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: Styles.textStyle20,
                   ),
-                  SizedBox(height: 3),
-                  Text(
-                    "This Is Plain",
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: Styles.textStyle14,
+                  const SizedBox(height: 3),
+                  Wrap(
+                    children: [
+                      ...book.volumeInfo!.authors!.map(
+                        (e) => Text(
+                          "$e,   ",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: Styles.textStyle14,
+                        ),
+                      ).take(2),
+                    ],
                   ),
-                  SizedBox(height: 3),
-                  Row(
+                  const SizedBox(height: 3),
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        r"19.6$",
+                        r"Free",
                         style: Styles.textStyle20,
                       ),
-                      BookRating(),
+                      BookRating(rating: "0", count: 0,),
                     ],
                   )
                 ],
@@ -71,21 +68,30 @@ class BestSellerListViewItem extends StatelessWidget {
 }
 
 class BookRating extends StatelessWidget {
-  const BookRating({super.key});
+  const BookRating({super.key, required this.rating, required this.count});
+
+  final String rating;
+  final int count;
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        FaIcon(
+        const FaIcon(
           FontAwesomeIcons.solidStar,
           color: Colors.amber,
         ),
-        SizedBox(width: 6.3),
-        Text("4.3", style: Styles.textStyle18,),
-        SizedBox(width: 6.3),
-        Text("(2222)", style: Styles.textStyle14,),
+        const SizedBox(width: 6.3),
+        Text(
+          rating,
+          style: Styles.textStyle18,
+        ),
+        const SizedBox(width: 6.3),
+        Text(
+          "($count)",
+          style: Styles.textStyle14,
+        ),
       ],
     );
   }

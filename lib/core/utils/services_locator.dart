@@ -10,9 +10,9 @@ final sl = GetIt.instance;
 
 class ServicesLocator {
   static void init(){
-    // //cubits
-    // sl.registerFactory(() => FeaturedBooksCubit(sl()));
-    // sl.registerFactory(() => NewestBooksCubit(sl()));
+    //cubits
+    sl.registerFactory(() => FeaturedBooksCubit(sl()));
+    sl.registerFactory(() => NewestBooksCubit(sl()));
     
     //repositories
     sl.registerLazySingleton<HomeRepositoryImpl>(() => HomeRepositoryImpl(sl()));

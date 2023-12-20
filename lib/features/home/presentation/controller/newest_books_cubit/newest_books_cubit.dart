@@ -1,14 +1,14 @@
 import 'package:bloc/bloc.dart';
-import 'package:bookly/features/home/data/repository/home_repository.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../data/models/book_model.dart';
+import '../../../data/repository/home_repository_impl.dart';
 
 part 'newest_books_state.dart';
 
 class NewestBooksCubit extends Cubit<NewestBooksState> {
   NewestBooksCubit(this.homeRepository) : super(NewestBooksInitial());
-  HomeRepository homeRepository;
+  HomeRepositoryImpl homeRepository;
 
   Future<void> fetchNewestBooks() async {
     emit(NewestBooksLoading());
