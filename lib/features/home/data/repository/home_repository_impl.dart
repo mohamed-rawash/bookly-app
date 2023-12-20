@@ -35,4 +35,18 @@ class HomeRepositoryImpl implements HomeRepository {
       return left(ServerFailure('Opps there was an error, Please try again!'));
     }
   }
+
+  @override
+  Future<Either<Failure, List<BookModel>>> fetchSimilarBooks({required String category}) async {
+    try {
+      final data = await apiService.get(endPoint: "volumes?q=subject:computer science&Filtering=free-ebooks&Sorting=relevance");
+      print("******************************************************");
+      print(data["items"]);
+      return right(List<BookModel>.from((data['items'] as List).map((e) => BookModel.fromJson(e))));
+    } on DioException catch (error) {
+      return left(ServerFailure.fromDioError(error));
+    } catch (error) {
+      return left(ServerFailure(error.toString()));
+    }
+  }
 }

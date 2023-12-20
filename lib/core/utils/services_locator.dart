@@ -3,6 +3,7 @@ import 'package:bookly/features/home/data/repository/home_repository.dart';
 import 'package:bookly/features/home/data/repository/home_repository_impl.dart';
 import 'package:bookly/features/home/presentation/controller/featured_books_cubit/featured_books_cubit.dart';
 import 'package:bookly/features/home/presentation/controller/newest_books_cubit/newest_books_cubit.dart';
+import 'package:bookly/features/home/presentation/controller/similar_books_cubit/similar_books_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -13,7 +14,8 @@ class ServicesLocator {
     //cubits
     sl.registerFactory(() => FeaturedBooksCubit(sl()));
     sl.registerFactory(() => NewestBooksCubit(sl()));
-    
+    sl.registerFactory(() => SimilarBooksCubit(sl()));
+
     //repositories
     sl.registerLazySingleton<HomeRepositoryImpl>(() => HomeRepositoryImpl(sl()));
     

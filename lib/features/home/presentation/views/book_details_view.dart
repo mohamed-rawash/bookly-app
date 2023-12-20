@@ -1,8 +1,25 @@
+import 'package:bookly/features/home/data/models/book_model.dart';
+import 'package:bookly/features/home/presentation/controller/similar_books_cubit/similar_books_cubit.dart';
 import 'package:bookly/features/home/presentation/views/component/book_details_view_body.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BookDetailsView extends StatelessWidget {
-  const BookDetailsView({super.key});
+class BookDetailsView extends StatefulWidget {
+  const BookDetailsView({super.key, required this.book});
+
+  final BookModel book;
+
+  @override
+  State<BookDetailsView> createState() => _BookDetailsViewState();
+}
+
+class _BookDetailsViewState extends State<BookDetailsView> {
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<SimilarBooksCubit>().fetchSimilarBooks(category: widget.book.volumeInfo!.categories![0]);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +27,7 @@ class BookDetailsView extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            onPressed: () {},
+            onPressed: () => Navigator.pop(context),
             icon: const Icon(Icons.close),
           ),
           actions: [
@@ -20,7 +37,7 @@ class BookDetailsView extends StatelessWidget {
             ),
           ],
         ),
-        body: const BookDetailsViewBody(),
+        body: BookDetailsViewBody(book: widget.book,),
       ),
     );
   }

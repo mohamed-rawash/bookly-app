@@ -4,7 +4,9 @@ import 'package:shimmer/shimmer.dart';
 import 'custom_skelton.dart';
 
 class CustomImageLoading extends StatelessWidget {
-  const CustomImageLoading({super.key});
+  const CustomImageLoading({super.key, this.height, this.width});
+
+  final double? height, width;
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +14,9 @@ class CustomImageLoading extends StatelessWidget {
       baseColor: Colors.grey.shade200,
       highlightColor: Colors.grey.shade500,
       enabled: true,
-      child: const Skelton(
-        width: 130,
-        height: 220,
+      child:  Skelton(
+        width: width?? 130,
+        height: height?? 220,
       ),
     );
   }

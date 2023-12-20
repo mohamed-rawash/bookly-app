@@ -4,7 +4,9 @@ import 'package:bookly/features/home/presentation/views/component/custom_book_im
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../config/app_router.dart';
 import '../../../../../core/widgets/custom_error_widget.dart';
+import 'featured_list_item.dart';
 
 class FeaturedList extends StatelessWidget {
   const FeaturedList({Key? key}) : super(key: key);
@@ -21,9 +23,7 @@ class FeaturedList extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
               itemCount: state.books.length,
-              itemBuilder: (context, index) => CustomBookImage(
-                imageUrl: state.books[index].volumeInfo!.imageLinks!.thumbnail!,
-              ),
+              itemBuilder: (context, index) => FeaturedListItem(book: state.books[index],),
               separatorBuilder: (context, index) => const SizedBox(
                 width: 14,
               ),

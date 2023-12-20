@@ -1,10 +1,10 @@
-import 'package:bookly/core/widgets/custom_image_loading.dart';
+
 import 'package:bookly/features/home/presentation/views/component/best_seller_list_view.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/assets.dart';
+
 import '../../../../core/utils/styles.dart';
-import '../../../../core/widgets/custom_Book_item_loading.dart';
+
 import 'component/custom_app_bar.dart';
 import 'component/featured_list.dart';
 
